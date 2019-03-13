@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 # Модель категории
@@ -13,6 +14,9 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('shop:ProductListByCategory', args=[self.slug])
 
 
 # Модель продукта
@@ -37,3 +41,5 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('shop:ProductDetail', args=[self.id, self.slug])
